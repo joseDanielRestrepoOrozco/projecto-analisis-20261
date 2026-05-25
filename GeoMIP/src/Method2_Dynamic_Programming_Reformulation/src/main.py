@@ -108,9 +108,11 @@ def ejecutar_con_tiempo(config_sistema, condiciones, alcance, mecanismo, resulta
             "tiempo": None,
         })
 
+from src.models.base.application import aplicacion
+
 def resolver_tpm_path(estado_inicio: str) -> Path:
     """Find TPM file in common project locations based on state size."""
-    sample_name = f"N{len(estado_inicio)}A.csv"
+    sample_name = f"N{len(estado_inicio)}{aplicacion.pagina_sample_network}.csv"
     candidates = (
         METHOD2_ROOT / "src" / ".samples" / sample_name,
         METHOD2_ROOT / ".samples" / sample_name,
@@ -120,9 +122,8 @@ def resolver_tpm_path(estado_inicio: str) -> Path:
         if candidate.exists():
             return candidate
     raise FileNotFoundError(
-        f"No se encontró la TPM '{sample_name}'. Busqué en: {', '.join(str(c) for c in candidates)}"
+        f"No se lsencontró la TPM '{sample_name}'. Busqué en: {', '.join(str(c) for c in candidates)}"
     )
-
 
 def inferir_estado_inicial() -> str:
     """Infer an initial state from available datasets (prefers largest NxA.csv)."""

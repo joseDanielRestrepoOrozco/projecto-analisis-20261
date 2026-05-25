@@ -1,7 +1,4 @@
-import heapq
-from src.constants.error import ERROR_INCOMPATIBLE_SIZES
-from src.models.core.system import System
-from src.constants.base import NET_LABEL, STR_ZERO
+from src.constants.base import NET_LABEL
 from src.funcs.base import ABECEDARY
 from src.middlewares.slogger import SafeLogger
 from src.funcs.base import emd_efecto
@@ -22,10 +19,7 @@ from src.middlewares.profile import profiler_manager, profile
 from src.models.core.solution import Solution
 import numpy as np
 import time
-from typing import List, Dict, Tuple
-
-from concurrent.futures import ThreadPoolExecutor
-import itertools
+from typing import List, Dict
 
 class GeometricSIA(SIA):
     def __init__(self, gestor: Manager):
