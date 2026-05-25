@@ -17,7 +17,12 @@ def main():
 
     gestor = Manager(estado_inicial)
     tpm_path = cfg["tpm_path"] or gestor.tpm_filename
-    tpm = np.genfromtxt(tpm_path, delimiter=",")
+    try:
+        tpm = np.genfromtxt(tpm_path, delimiter=",")
+    except (FileNotFoundError, OSError) as e:
+        raise FileNotFoundError(f"No se pudo cargar TPM desde {tpm_path}: {e}")
+    except ValueError as e:
+        raise ValueError(f"Formato inválido en TPM {tpm_path}: {e}")
 
     print(f"Analizando red: {tpm_path}")
     print(f"TPM:\n{tpm}")

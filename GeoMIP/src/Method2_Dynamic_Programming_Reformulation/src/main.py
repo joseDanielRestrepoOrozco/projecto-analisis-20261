@@ -122,7 +122,7 @@ def resolver_tpm_path(estado_inicio: str) -> Path:
         if candidate.exists():
             return candidate
     raise FileNotFoundError(
-        f"No se lsencontró la TPM '{sample_name}'. Busqué en: {', '.join(str(c) for c in candidates)}"
+        f"No se encontró la TPM '{sample_name}'. Busqué en: {', '.join(str(c) for c in candidates)}"
     )
 
 def inferir_estado_inicial() -> str:
