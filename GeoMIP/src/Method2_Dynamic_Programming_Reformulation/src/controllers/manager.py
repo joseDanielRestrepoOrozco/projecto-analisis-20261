@@ -11,7 +11,6 @@ from src.constants.base import (
     COLON_DELIM,
     CSV_EXTENSION,
     SAMPLES_PATH,
-    RESOLVER_PATH,
 )
 
 
@@ -67,12 +66,6 @@ class Manager:
     def tpm_filename(self) -> Path:
         return (
             self.ruta_base / f"N{len(self.estado_inicial)}{self.pagina}.{CSV_EXTENSION}"
-        )
-
-    @property
-    def output_dir(self) -> Path:
-        return Path(
-            f"{RESOLVER_PATH}/N{len(self.estado_inicial)}{self.pagina}/{self.estado_inicial}"
         )
 
     def generar_red(self, dimensiones: int, datos_discretos: bool = True) -> str:

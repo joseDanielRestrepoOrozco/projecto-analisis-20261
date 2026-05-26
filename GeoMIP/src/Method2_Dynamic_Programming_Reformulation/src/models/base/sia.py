@@ -83,9 +83,6 @@ class SIA(ABC):
             [ind for ind, bit in enumerate(mecanismo) if bit == STR_ZERO], dtype=np.int8
         )
 
-        # Preparar directorio de salida
-        self.sia_gestor.output_dir.mkdir(parents=True, exist_ok=True)
-
         # Cargar y preparar datos
         # tpm = self.sia_cargar_tpm() #! DESCOMENTAR PARA UN SOLO ESTADO INICIAL
         estado_inicial = np.array(

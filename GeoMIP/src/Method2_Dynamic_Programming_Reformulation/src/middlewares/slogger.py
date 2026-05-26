@@ -9,7 +9,6 @@ from colorama import init, Fore, Style
 
 from src.constants.base import LOGS_PATH
 
-
 class ColorFormatter(logging.Formatter):
     """Formatter personalizado para consola con colores usando colorama."""
 

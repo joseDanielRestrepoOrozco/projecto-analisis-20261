@@ -3,7 +3,6 @@ from typing import Union
 import numpy as np
 from src.middlewares.slogger import SafeLogger
 from src.funcs.base import emd_efecto, ABECEDARY
-from src.middlewares.profile import profiler_manager, profile
 from src.funcs.format import fmt_biparte_q
 from src.controllers.manager import Manager
 from src.models.base.sia import SIA
@@ -99,9 +98,6 @@ class QNodes(SIA):
 
     def __init__(self, gestor: Manager):
         super().__init__(gestor)
-        profiler_manager.start_session(
-            f"{NET_LABEL}{len(gestor.estado_inicial)}{gestor.pagina}"
-        )
         self.m: int
         self.n: int
         self.tiempos: tuple[np.ndarray, np.ndarray]
@@ -116,7 +112,6 @@ class QNodes(SIA):
 
         self.logger = SafeLogger(QNODES_STRAREGY_TAG)
 
-    @profile(context={TYPE_TAG: QNODES_ANALYSIS_TAG})
     def aplicar_estrategia(
         self,
         condicion: str,

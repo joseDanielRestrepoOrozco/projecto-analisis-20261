@@ -15,7 +15,6 @@ from src.constants.models import (
 )
 from src.controllers.manager import Manager
 from src.funcs.format import fmt_biparte_q
-from src.middlewares.profile import profiler_manager, profile
 from src.models.core.solution import Solution
 import numpy as np
 import time
@@ -24,9 +23,7 @@ from typing import List, Dict
 class GeometricSIA(SIA):
     def __init__(self, gestor: Manager):
         super().__init__(gestor)
-        profiler_manager.start_session(
-            f"{NET_LABEL}{len(gestor.estado_inicial)}{gestor.pagina}"
-        )
+
         self.etiquetas = [tuple(s.lower() for s in ABECEDARY), ABECEDARY]
         self.logger = SafeLogger(GEOMETRIC_STRAREGY_TAG)
         self.tabla_transiciones: dict ={}
@@ -34,7 +31,6 @@ class GeometricSIA(SIA):
         self.tabla :dict[int, list[tuple[int, int]]] = {}
         self.memoria_particiones: dict[tuple[int, int], tuple[float, float]] = {}
 
-    @profile(context={TYPE_TAG: GEOMETRIC_ANALYSIS_TAG})
     def aplicar_estrategia(
         self,
         condicion: str,

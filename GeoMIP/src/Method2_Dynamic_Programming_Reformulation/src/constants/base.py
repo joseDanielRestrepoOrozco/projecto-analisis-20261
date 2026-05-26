@@ -41,7 +41,6 @@ NET_LABEL: str = "NET"
 LOGS_PATH: str = ".logs"
 SAMPLES_PATH: str = "src/.samples/"
 PROFILING_PATH: str = "review/profiling"
-RESOLVER_PATH: str = "review/resolver"
 
 CSV_EXTENSION: str = "csv"
 HTML_EXTENSION: str = "html"
