@@ -9,13 +9,10 @@ from src.models.base.sia import SIA
 
 from src.models.core.solution import Solution
 from src.constants.models import (
-    QNODES_ANALYSIS_TAG,
     QNODES_LABEL,
     QNODES_STRAREGY_TAG,
 )
 from src.constants.base import (
-    TYPE_TAG,
-    NET_LABEL,
     INFTY_NEG,
     INFTY_POS,
     LAST_IDX,
@@ -117,8 +114,9 @@ class QNodes(SIA):
         condicion: str,
         alcance: str,
         mecanismo: str,
+        mtp: np.ndarray,
     ):
-        self.sia_preparar_subsistema(condicion, alcance, mecanismo)
+        self.sia_preparar_subsistema(condicion, alcance, mecanismo, mtp)
 
         futuro = tuple(
             (EFECTO, efecto) for efecto in self.sia_subsistema.indices_ncubos

@@ -6,10 +6,8 @@ from src.models.base.sia import SIA
 from src.constants.base import (
     ACTUAL,
     EFECTO,
-    TYPE_TAG,
 )
 from src.constants.models import (
-    GEOMETRIC_ANALYSIS_TAG,
     GEOMETRIC_LABEL,
     GEOMETRIC_STRAREGY_TAG,
 )

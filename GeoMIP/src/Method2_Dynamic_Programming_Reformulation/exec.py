@@ -1,8 +1,10 @@
 from src.models.base.application import aplicacion
 from src.controllers.manager import Manager
 from src.controllers.strategies.geometric import GeometricSIA
+from src.controllers.strategies.q_nodes import QNodes
 from src.lib.config import resolve_config
 import numpy as np
+
 
 def main():
     cfg = resolve_config()
