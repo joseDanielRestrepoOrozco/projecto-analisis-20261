@@ -33,6 +33,7 @@ def fmt_biparte_q(
 ) -> str:
     top_prim, bottom_prim = fmt_parte_q(prim, to_sort)
     top_dual, bottom_dual = fmt_parte_q(dual, to_sort)
+    
 
     return f"{top_prim}{top_dual}\n{bottom_prim}{bottom_dual}"
 

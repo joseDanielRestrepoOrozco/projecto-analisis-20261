@@ -31,7 +31,7 @@ def main():
     print(f"Estado inicial: {estado_inicial}")
     print(f"Condiciones: {condiciones}, Alcance: {alcance}, Mecanismo: {mecanismo}")
 
-    analizador = GeometricSIA(gestor)
+    analizador = QNodes(gestor)
     solucion = analizador.aplicar_estrategia(
         condiciones,
         alcance,
