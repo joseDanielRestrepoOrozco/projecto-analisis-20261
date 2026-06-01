@@ -203,21 +203,12 @@ class QNodes(SIA):
         Returns:
             tuple[float, tuple[tuple[int, int], ...]]: El valor de pérdida en la primera posición, asociado con la partición óptima encontrada, identificada por la clave en partition_memory que produce la menor EMD.
         """
-        omegas_origen = np.array([vertices[0]])
-        deltas_origen = np.array(vertices[1:])
-
-        vertices_fase = vertices
-
-        omegas_ciclo = omegas_origen
-        deltas_ciclo = deltas_origen
-
-        total = len(vertices_fase) - 2
-        for i in range(len(vertices_fase) - 2):
-            self.logger.debug(f"total: {total-i}")
-            omegas_ciclo = [vertices_fase[0]]
-            deltas_ciclo = vertices_fase[1:]
+        for i in range(len(vertices) - 1):
+            omegas_ciclo = [vertices[0]]
+            deltas_ciclo = vertices[1:]
 
             emd_particion_candidata = INFTY_POS
+            dist_particion_candidata = None
 
             for j in range(len(deltas_ciclo) - 1):
                 # self.logger.critic(f"   {j=}")
@@ -231,17 +222,26 @@ class QNodes(SIA):
                     emd_iteracion = emd_union - emd_delta
 
                     if emd_iteracion < emd_local:
+                        if emd_delta == 0:
+                            clave = (
+                                tuple(deltas_ciclo[k])
+                                if isinstance(deltas_ciclo[k], list)
+                                else (deltas_ciclo[k],)
+                            )
+                            self.memoria_particiones[clave] = (
+                                emd_delta,
+                                dist_marginal_delta,
+                            )
+                            return clave
+
                         emd_local = emd_iteracion
                         indice_mip = k
-
-                    emd_particion_candidata = emd_delta
-                    dist_particion_candidata = dist_marginal_delta
-                    ...
+                        emd_particion_candidata = emd_delta
+                        dist_particion_candidata = dist_marginal_delta
                 # self.logger.critic(f"       [k]: {indice_mip}")
 
                 omegas_ciclo.append(deltas_ciclo[indice_mip])
                 deltas_ciclo.pop(indice_mip)
-                ...
 
             self.memoria_particiones[
                 tuple(
@@ -264,8 +264,7 @@ class QNodes(SIA):
             omegas_ciclo.pop()
             omegas_ciclo.append(par_candidato)
 
-            vertices_fase = omegas_ciclo
-            ...
+            vertices = omegas_ciclo
 
         return min(
             self.memoria_particiones, key=lambda k: self.memoria_particiones[k][0]
